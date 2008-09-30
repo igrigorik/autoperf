@@ -1,6 +1,7 @@
-#!/usr/bin/env ruby
-#
-# autoperf - tool to drive httperf benchmark tests for a web server
+#--
+# Copyright (C)2008 Ilya Grigorik
+# You can redistribute this under the terms of the Ruby license
+#++
 
 require 'rubygems'
 require 'optparse'
