@@ -42,7 +42,7 @@ class AutoPerf
           else
             new_value = ''
           end
-          conf[var_name] = new_value =~ /\d+/ ? new_value.to_i : new_value
+          conf[var_name] = new_value
         end
       end
     }
@@ -85,7 +85,7 @@ class AutoPerf
     report = Table(:column_names => ['rate', 'conn/s', 'req/s', 'replies/s avg',
                                      'errors', 'net io (KB/s)'])
 
-    (@conf['low_rate']..@conf['high_rate']).step(@conf['rate_step']) do |rate|
+    (@conf['low_rate'].to_i..@conf['high_rate'].to_i).step(@conf['rate_step'].to_i) do |rate|
       results[rate] = benchmark(@conf.merge({'httperf_rate' => rate}))
       report << results[rate].merge({'rate' => rate})
 
