@@ -52,7 +52,7 @@ class AutoPerf
 
   def benchmark(conf)
     httperf_opt = conf.keys.grep(/httperf/).collect {|k| "--#{k.gsub(/httperf_/, '')} #{conf[k]}"}.join(" ")
-    httperf_cmd = "httperf --hog --server #{conf['host']} --port #{conf['port']} #{httperf_opt}"
+    httperf_cmd = "httperf --hog --server #{conf['host']} --uri #{conf['uri']} --port #{conf['port']} #{httperf_opt}"
 
     res = Hash.new("")
     IO.popen("#{httperf_cmd} 2>&1") do |pipe|
