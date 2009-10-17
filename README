@@ -1,7 +1,7 @@
 Autoperf is a ruby driver for httperf, designed to help you automate load and performance
 testing of any web application - for a single end point, or through log replay.
 
-More: http://www.igvita.com/2008/09/30/load-testing-with-log-replayload-testing-with-log-replay/
+More: http://www.igvita.com/2008/09/30/load-testing-with-log-replay/
 
 To get started, first download & install httperf:
 http://www.hpl.hp.com/research/linux/httperf/
@@ -23,13 +23,13 @@ Next, configure your execution plan (see sample.conf), and run autoperf:
 ruby autoperf.rb -c sample.conf
 
 Sample output:
-+----------------------------------------------------------------+
-| rate | conn/s | req/s | replies/s avg | errors | net io (KB/s) |
-+----------------------------------------------------------------+
-|  100 | 99.9   | 99.9  | 99.7          | 0      | 45.4          |
-|  120 | 119.7  | 119.7 | 120.0         | 0      | 54.4          |
-|  140 | 139.3  | 139.3 | 138.0         | 0      | 63.6          |
-|> 160 | 151.9  | 151.9 | 147.0         | 0      | 69.3          |
-|  180 | 132.2  | 129.8 | 137.4         | 27     | 59.6          |
-|  200 | 119.8  | 117.6 | 139.9         | 31     | 53.9          |
-+----------------------------------------------------------------+
++-----------------------------------------------------------------------------+
+| rate | conn/s | req/s | replies/s avg | errors | 5xx status | net io (KB/s) |
++-----------------------------------------------------------------------------+
+|  100 | 99.9   | 99.9  | 99.7          | 0      | 0          | 45.4          |
+|  120 | 119.7  | 119.7 | 120.0         | 0      | 0          | 54.4          |
+|  140 | 139.3  | 139.3 | 138.0         | 0      | 0          | 63.6          |
+|> 160 | 151.9  | 151.9 | 147.0         | 0      | 0          | 69.3          |
+|  180 | 132.2  | 129.8 | 137.4         | 27     | 0          | 59.6          |
+|  200 | 119.8  | 117.6 | 139.9         | 31     | 14         | 53.9          |
++-----------------------------------------------------------------------------+
