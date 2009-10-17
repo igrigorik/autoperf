@@ -73,6 +73,7 @@ class AutoPerf
           res['replies/s avg'] = $2
           res['replies/s max'] = $3
           res['replies/s stddev'] = $4
+        when /^Reply status: 1xx=\d+ 2xx=\d+ 3xx=\d+ 4xx=\d+ 5xx=(\d+)/ then res['5xx status'] = $1
         end
       end
     end
@@ -83,14 +84,14 @@ class AutoPerf
   def run
     results = {}
     report = Table(:column_names => ['rate', 'conn/s', 'req/s', 'replies/s avg',
-                                     'errors', 'net io (KB/s)'])
+                                     'errors', '5xx status', 'net io (KB/s)'])
 
     (@conf['low_rate'].to_i..@conf['high_rate'].to_i).step(@conf['rate_step'].to_i) do |rate|
       results[rate] = benchmark(@conf.merge({'httperf_rate' => rate}))
       report << results[rate].merge({'rate' => rate})
 
       puts report.to_s
-      puts results[rate]['output'] if results[rate]['errors'].to_i > 0
+      puts results[rate]['output'] if results[rate]['errors'].to_i > 0 || results[rate]['5xx status'].to_i > 0
     end
   end
 end
