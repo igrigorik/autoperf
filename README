@@ -33,3 +33,16 @@ Sample output:
 |  180 | 132.2  | 129.8 | 137.4         | 27     | 0          | 59.6          |
 |  200 | 119.8  | 117.6 | 139.9         | 31     | 14         | 53.9          |
 +-----------------------------------------------------------------------------+
+
+
+If your server uses caching, making it pointless to run the same requests over
+and over, you can use different requests for each run.
+
+# Create 10 1000-line files (xa, xb, xc etc)
+split -a 1 requests_path
+
+# Convert to null-terminated strings
+for x in x?; do tr "\n" "\0" < $x > $x.nul; done
+
+# run as before, but use the `wlog` line instead of `httperf_wlog` in the conf file
+ruby autoperf.rb -c sample.conf

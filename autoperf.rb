@@ -47,12 +47,21 @@ class AutoPerf
       end
     }
 
+    if conf['wlog']
+      conf['wlog'] = Dir[conf['wlog']].sort
+    end
+
     return conf
   end
 
   def benchmark(conf)
     httperf_opt = conf.keys.grep(/httperf/).collect {|k| "--#{k.gsub(/httperf_/, '')} #{conf[k]}"}.join(" ")
-    httperf_cmd = "httperf --hog --server #{conf['host']} --port #{conf['port']} #{httperf_opt}"
+    if conf['wlog']
+      wlog = conf['wlog'].shift
+      conf['wlog'].push wlog
+      wlog_opt = "--wlog n,#{wlog}"
+    end
+    httperf_cmd = "httperf --hog --server #{conf['host']} --port #{conf['port']} #{httperf_opt} #{wlog_opt}"
 
     res = Hash.new("")
     IO.popen("#{httperf_cmd} 2>&1") do |pipe|
