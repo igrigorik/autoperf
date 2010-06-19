@@ -34,7 +34,6 @@ Sample output:
 |  200 | 119.8  | 117.6 | 139.9         | 31     | 14         | 53.9          |
 +-----------------------------------------------------------------------------+
 
-
 If your server uses caching, making it pointless to run the same requests over
 and over, you can use different requests for each run.
 
