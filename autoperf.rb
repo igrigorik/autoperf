@@ -61,7 +61,7 @@ class AutoPerf
       conf['wlog'].push wlog
       wlog_opt = "--wlog n,#{wlog}"
     end
-    httperf_cmd = "httperf --hog --server #{conf['host']} --uri #{conf['uri']} --port #{conf['port']} #{httperf_opt} #{wlog_opt}"
+    httperf_cmd = "httperf --hog --server=#{conf['host']} --uri=#{conf['uri']} --port=#{conf['port']} #{httperf_opt} #{wlog_opt}"
 
     res = Hash.new("")
     IO.popen("#{httperf_cmd} 2>&1") do |pipe|
